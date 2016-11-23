@@ -1,0 +1,57 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @evento.nombre %>
+</p>
+
+<p>
+  <strong>Descripcion:</strong>
+  <%= @evento.descripcion %>
+</p>
+
+<p>
+  <strong>Fecha:</strong>
+  <%= @evento.fecha %>
+</p>
+
+<table>
+	<% @imagenes.each do |im| %>
+		<tr>
+			<%=image_tag(((Rails.root.to_s)<<"/app/assets/images/eventos/")<<im.nombre_imagen, {:alt=>""}) %>
+		</tr>
+	<% end %>
+</table>
+
+<p>
+	<strong>Comentarios:</strong>
+	<% @comentarios.each do |c| %>
+		<p>
+			<%=c.comentario %>
+			<% if es_admin? %>
+				<%= link_to "eliminar comentario", :controller=>"eventos", :action=>"eliminar_comentario", :id=> c.id, :evento_id=> @evento.id%>
+			<% end %>
+		</p>
+	<% end %>
+
+</p>
+<%= form_tag "crear_comentario", :method=>"post"  do %>
+<p>
+<%=label_tag "Escribe un comentario del evento" %> <br>
+<%= text_area_tag "comentarios", nil, cols: 60, rows: 2%> <br>
+<%= hidden_field_tag(:id, @evento.id) %>
+<%= submit_tag "Enviar comentarios", :confirm=>true, :value => "Enviar comentarios" %>
+</p>
+<% end %>
+
+<%= form_tag "subir_imagen", :method=>"post", :multipart => true  do %>
+<p>
+<%= label_tag "Archivo a subir:" %> <br>
+<%= file_field 'upload', 'datafile' %></p>
+<%= hidden_field_tag(:id, @evento.id) %>
+<%= submit_tag "subir imagen", :confirm=>true, :value => "Subir imagen" %>	
+</p>
+<% end %>
+<% if es_admin? %>
+<%= link_to 'Editar evento', edit_evento_path(@evento) %> |
+<% end %>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ClubDeFans</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<table>
+      <tr>
+        <th>
+          <%= link_to "Inicio", :controller=>"home", :action =>"index" %>
+        </th>
+        <th>
+          <%= link_to "Contacto", :controller=>"home", :action =>"contacto" %>
+        </th>
+        <th>
+          <%= link_to "Quienes Somos", :controller=>"home", :action =>"quienes_somos" %>
+        </th>
+        <th>
+          <%= link_to "Registrarse", :controller=>"usuarios", :action =>"new" %>
+        </th>
+        <th>  
+          <%= link_to "Iniciar sesión", :controller=>"sessions", :action =>"new" %>
+        </th>
+        <% if iniciado? %>
+          <th>
+            <%= link_to "Perfil", usuario_actual %>  
+          </th>
+          <th>
+            <%= link_to "Cerrar sesión", logout_path, method: "delete" %>
+          </th>
+          <% if es_admin?%>
+            <th>
+              <%= link_to "Mostrar usuarios",usuarios_path %>
+            </th>
+            <th>
+              <%= link_to "Mostrar comentarios", :controller=>"home", :action=>"lista_comentarios" %>
+            </th>
+            <th>
+              <%= link_to 'Añadir Evento', new_evento_path %>
+            </th>
+          <% end %>
+        <% end %>
+      </tr>
+    </table>
+
+
+<%= yield %>
+
+</body>
+</html>

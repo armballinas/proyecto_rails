@@ -1,0 +1,14 @@
+<% provide(:title, 'Comentarios') %>
+<h1>Listado de todos los comentarios</h1>
+
+<ul class="comentarios">
+  <% @comentarios.each do |com| %>
+	<li>
+  		<%=com.nombre %>: <br>
+  		<p>	<%= com.comentario%>  </p>
+  		<%=com.email %>: <br>
+  		<%= link_to "eliminar comentario", :controller=>"home", :action=>"eliminar", :id=> com.id%>
+	</li>
+  <% end %>
+
+</ul>

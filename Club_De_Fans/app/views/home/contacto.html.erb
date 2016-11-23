@@ -1,0 +1,30 @@
+<h1>
+	<%=@titulo%>
+</h1>
+<h2>Envíanos tus comentarios y sugerencias.</h2>
+<h3>Si quieres ser un administrador, escríbelo en el comentario</h3>
+
+
+	<%= form_tag "crear_contacto", :multipart=>true, :method=>"post"  do %>
+	<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+		<p>
+			<%= label_tag "Nombre:" %>
+			<%= text_field_tag "nombre", nil, :size=>50, :placeholder=>"Nombre",:maxlength => 60, :required=> true%>
+		</p>
+		<p>
+			<%= label_tag "Comentarios:" %>
+		</p>
+	<p>
+		<%= text_area_tag "comentarios", nil, cols: 60, rows: 10, :required=> true%>	  
+	</p>
+	<p>
+		<%= label_tag "Correo electrónico:" %>
+	
+			<%= email_field_tag :email, nil, :size=>30, :maxlength => 30, :placeholder => "Email", :require=>true%>
+
+	</p>
+	<p>
+		<%= submit_tag "Enviar comentarios", :confirm=>true, :value => "Enviar comentarios" %>
+	</p>
+	
+	<%end %>
