@@ -7,47 +7,59 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<table>
-      <tr>
-        <th>
-          <%= link_to "Inicio", :controller=>"home", :action =>"index" %>
-        </th>
-        <th>
+
+<div id="main-container" class="container-fluid">
+      <div class="row">
+        <div class="col-md-1">  
+        </div>
+
+        <div class="col-md-1">
+          <%= link_to "Inicio", :controller=>"home", :action =>"index",class: 'btn btn-link' %>
+        </div>
+        <div class="col-md-1">
           <%= link_to "Contacto", :controller=>"home", :action =>"contacto" %>
-        </th>
-        <th>
+        </div>
+        <div class="col-md-1">
           <%= link_to "Quienes Somos", :controller=>"home", :action =>"quienes_somos" %>
-        </th>
-        <th>
+        </div>
+        <div class="col-md-1">
           <%= link_to "Registrarse", :controller=>"usuarios", :action =>"new" %>
-        </th>
-        <th>  
+        </div>
+        <div class="col-md-1">
           <%= link_to "Iniciar sesión", :controller=>"sessions", :action =>"new" %>
-        </th>
+        </div>
         <% if iniciado? %>
-          <th>
+          <div class="col-md-1">
             <%= link_to "Perfil", usuario_actual %>  
-          </th>
-          <th>
+          </div>
+          <div class="col-md-1">
             <%= link_to "Cerrar sesión", logout_path, method: "delete" %>
-          </th>
+          </div>
           <% if es_admin?%>
-            <th>
+            <div class="col-md-1">
               <%= link_to "Mostrar usuarios",usuarios_path %>
-            </th>
-            <th>
+            </div>
+            <div class="col-md-1">
               <%= link_to "Mostrar comentarios", :controller=>"home", :action=>"lista_comentarios" %>
-            </th>
-            <th>
+            </div>
+            <div class="col-md-1"> 
               <%= link_to 'Añadir Evento', new_evento_path %>
-            </th>
+            </div>
           <% end %>
         <% end %>
-      </tr>
-    </table>
-
-
-<%= yield %>
-
+        <div class="col-md-1">  
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-1">  
+        </div>
+        <div class="col-md-10">  
+          <%= yield %>
+        </div>
+        <div class="col-md-1">  
+        </div>
+      </div>
+    </div>
+</div>
 </body>
 </html>

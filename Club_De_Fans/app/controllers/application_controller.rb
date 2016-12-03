@@ -11,12 +11,16 @@ class ApplicationController < ActionController::Base
       end
     end
 
-    def usuario_correcto
-      @usuario = Usuario.find(params[:id])
-      redirect_to("/home/quienes_somos") unless @usuario == usuario_actual
-    end
+  def usuario_correcto
+    @usuario = Usuario.find(params[:id])
+    redirect_to(root_url) unless @usuario == usuario_actual
+  end
 
-    def usuario_admin
-      redirect_to(root_url) unless es_admin?
-    end
+  def usuario_admin
+    not_found unless es_admin?
+  end
+
+  def not_found
+    render :file => "#{Rails.root}/public/500", :layout => false
+  end
 end

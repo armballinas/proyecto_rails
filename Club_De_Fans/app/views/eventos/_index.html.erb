@@ -2,29 +2,21 @@
 
 <h1>Listado de Eventos</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Nombre</th>
-      <th>Fecha</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @eventos.each do |evento| %>
-      <tr>
-        <td><%= evento.nombre %></td>
-        <td><%= evento.fecha %></td>
-        <td><%= link_to 'Ver más', evento %></td>
-        <%if iniciado? && es_admin? %>
-        <td><%= link_to 'Editar evento', edit_evento_path(evento) %></td>
-        <td><%= link_to 'Eliminar el evento', evento, method: :delete, data: { confirm: '¿Seguro quieres borrar este evento y todos los comentarios y demás datos asociados a él?' } %></td>
-        <% end %>
-      </tr>
+<ul class="list-group">
+<% @eventos.each do |evento| %>
+  <li class="list-group-item">
+   <h2> Nombre: <%= evento.nombre %> </h2>
+   <h3> Fecha: <%= evento.fecha %> </h3>
+   <h3> <%= link_to 'Ver más', evento %> </h3>
+    <%if iniciado? && es_admin? %>
+        <%= link_to 'Editar evento', edit_evento_path(evento), class: "btn btn-sm btn-warning" %> 
+        <%= link_to 'Eliminar el evento', evento, method: :delete, data: { confirm: '¿Seguro quieres borrar este evento y todos los comentarios y demás datos asociados a él?' }, class: "btn btn-sm btn-danger"%>
     <% end %>
-  </tbody>
-</table>
+  </li>
+<% end %>
+</ul>
+
+
 
 <br>
 

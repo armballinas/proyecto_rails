@@ -1,13 +1,15 @@
 <% provide(:title, 'Comentarios') %>
 <h1>Listado de todos los comentarios</h1>
 
-<ul class="comentarios">
+
+
+<ul class="list-group">
   <% @comentarios.each do |com| %>
-	<li>
-  		<%=com.nombre %>: <br>
-  		<p>	<%= com.comentario%>  </p>
-  		<%=com.email %>: <br>
-  		<%= link_to "eliminar comentario", :controller=>"home", :action=>"eliminar", :id=> com.id%>
+	<li class="list-group-item">
+  		<h4><%=com.nombre %>: </h4>
+  		<%= com.comentario%> <br>
+  		<h5><%=com.email %> </h5>
+  		<%= link_to "eliminar comentario", :controller=>"home", :action=>"eliminar", class: "btn btn-sm btn-danger",:id=> com.id%>	
 	</li>
   <% end %>
 

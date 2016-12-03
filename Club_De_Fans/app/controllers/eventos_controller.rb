@@ -83,23 +83,28 @@ class EventosController < ApplicationController
   def subir_imagen
     if request.post?
      archivo = params[:upload]
-     nombre_archivo = archivo['datafile'].original_filename  if  (archivo['datafile'] !='')
      id = (params[:id])
-     tipo_archivo = nombre_archivo.split('.').last
-     if ["png","jpg","jpeg"].include? tipo_archivo
-      nombre_imagen = Time.now.to_i
-      archivo = archivo['datafile'].read
-      nombre_imagen_tipo = "#{nombre_imagen}." + tipo_archivo
-      ImagenNombre.create(:nombre_imagen=>nombre_imagen_tipo, :id_evento => id)
-      dir = (Rails.root.to_s)<<"/app/assets/images/eventos/"
-      File.open(dir + nombre_imagen_tipo, "wb")  do |f|  
+     if archivo != nil
+      nombre_archivo = archivo['datafile'].original_filename  if  (archivo['datafile'] !='')
+      tipo_archivo = nombre_archivo.split('.').last
+      if ["png","jpg","jpeg"].include? tipo_archivo
+        nombre_imagen = Time.now.to_i
+        archivo = archivo['datafile'].read
+        nombre_imagen_tipo = "#{nombre_imagen}." + tipo_archivo
+        ImagenNombre.create(:nombre_imagen=>nombre_imagen_tipo, :id_evento => id)
+        dir = (Rails.root.to_s)<<"/app/assets/images/eventos/"
+        File.open(dir + nombre_imagen_tipo, "wb")  do |f|  
           f.write(archivo) 
+        end
+        redirect_to "/eventos/"+id
+      else
+        redirect_to "/eventos/"+id,notice: "el archivo no tiene el formato correcto"
       end
-      redirect_to "/eventos/"+id
      else
       redirect_to "/eventos/"+id,notice: "el archivo no tiene el formato correcto"
      end
-     
+    else
+      redirect_to "/eventos/"+id,notice: "el archivo no tiene el formato correcto"
     end
   end
 

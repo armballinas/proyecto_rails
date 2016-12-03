@@ -7,7 +7,7 @@
         <li>El nombre no puede ser vacío.</li>
         <li>El email no puede ser vacío.</li>
         <li>El email debe tener un formato válido.</li>
-        <li>La contraseña no puede ser vacía y debe tener al menos 6 caracteres.</li>
+        <li>La contraseña no puede ser vacía y debe tener al menos 4 caracteres.</li>
       </ul>
     </div>
   <% end %>
@@ -28,7 +28,8 @@
     <%= f.label :password_confirmation, "Vuelve a escribir el Password" %> <br>
     <%= f.password_field :password_confirmation %>
   </div>
+  <br>
   <div class="actions">
-    <%= f.submit "Registrarse", class: "btn btn-primary"%>
+    <%= f.submit "Guardar", class: "btn btn-primary"%>
   </div>
 <% end %>

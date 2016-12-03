@@ -2,28 +2,14 @@
 
 <h1>Listado de Usuarios.</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Nombre</th>
-      <th>Email</th>      
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @usuarios.each do |usuario| %>
-      <tr>
-        <td><%= usuario.nombre %></td>
-        <td><%= usuario.email %></td>
-        <%if !usuario.tipo  %>
-          <td><%= link_to 'Eliminar usuario', usuario, method: :delete, data: { confirm: '¿Estás seguro?' } %></td>
-        <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Usuario', new_usuario_path %>
+<ul class="list-group">
+  <% @usuarios.each do |u| %>
+    <li class="list-group-item">
+      <h4>Nombre: </h4> <%=u.nombre %> <br>
+      <h4>Email: </h4> <%=u.email %> <br>
+      <%if !u.tipo  %>
+        <%= link_to 'Eliminar usuario', u, method: :delete, data: { confirm: '¿Estás seguro?' },class: "btn btn-danger" %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
